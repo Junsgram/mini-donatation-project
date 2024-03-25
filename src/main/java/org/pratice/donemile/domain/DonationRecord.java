@@ -11,11 +11,11 @@ import org.hibernate.annotations.ColumnDefault;
 @Builder
 @Table
 @Entity
-@SequenceGenerator(name = "myRecordSeq", sequenceName = "mile_seq", initialValue = 1, allocationSize = 1)
+//@SequenceGenerator(name = "myRecordSeq", sequenceName = "mile_seq", initialValue = 1, allocationSize = 1)
 public class DonationRecord extends BaseEntity{
     @Id
     @Column(name="recom_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "myRecordSeq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ColumnDefault("0")

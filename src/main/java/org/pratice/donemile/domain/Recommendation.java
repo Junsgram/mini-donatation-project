@@ -10,10 +10,10 @@ import lombok.*;
 @Builder
 @Table
 @Entity
-@SequenceGenerator(name = "myRecommendationSeq", sequenceName = "recommend_seq", initialValue = 1, allocationSize = 1)
+//@SequenceGenerator(name = "myRecommendationSeq", sequenceName = "recommend_seq", initialValue = 1, allocationSize = 1)
 public class Recommendation extends BaseEntity{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "myRecommendationSeq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="recommend_id")
     private Long id;
 

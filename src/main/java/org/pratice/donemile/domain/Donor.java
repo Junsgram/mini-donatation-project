@@ -5,20 +5,21 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.pratice.donemile.constant.Role;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Builder
-@Table
+@Table(name = "donor")
 @Entity
-@SequenceGenerator(name = "myDonorSeq", sequenceName = "donor_seq", initialValue = 1, allocationSize = 1)
+//@SequenceGenerator(name = "donor_seq_generator", sequenceName = "donor_seq", initialValue = 1, allocationSize = 1)
 public class Donor extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "myDonorSeq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="donor_id")
     private Long id;
 
@@ -38,7 +39,7 @@ public class Donor extends BaseEntity {
     private String address;
 
     @Column(nullable = false)
-    private Date birth;
+    private LocalDate birth;
 
     @Column(length = 30, nullable = false)
     private String phoneNum;
