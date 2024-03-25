@@ -11,10 +11,10 @@ import org.hibernate.annotations.ColumnDefault;
 @Builder
 @Table
 @Entity
-@SequenceGenerator(name = "myAccountSeq", sequenceName = "mile_seq", initialValue = 1, allocationSize = 1)
+//@SequenceGenerator(name = "myAccountSeq", sequenceName = "mile_seq", initialValue = 1, allocationSize = 1)
 public class MileageAccount extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator="myAccountSeq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="mile_id")
     private Long id;
 

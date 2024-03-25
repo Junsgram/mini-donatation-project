@@ -10,10 +10,10 @@ import lombok.*;
 @Builder
 @Table
 @Entity
-@SequenceGenerator(name = "myImgSeq", sequenceName = "mile_seq", initialValue = 1, allocationSize = 1)
+//@SequenceGenerator(name = "myImgSeq", sequenceName = "mile_seq", initialValue = 1, allocationSize = 1)
 public class EpisodeImg extends BaseEntity{
     @Id
-    @GeneratedValue(strategy =GenerationType.IDENTITY, generator = "myImgSeq")
+    @GeneratedValue(strategy =GenerationType.IDENTITY)
     @Column(name="img_id")
     private Long id;
 

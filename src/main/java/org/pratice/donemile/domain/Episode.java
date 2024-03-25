@@ -14,10 +14,10 @@ import java.util.List;
 @ToString
 @Builder
 @Entity
-@SequenceGenerator(name="myEpisodeSeq", sequenceName = "epi_seq", initialValue = 1, allocationSize = 1)
+//@SequenceGenerator(name="myEpisodeSeq", sequenceName = "epi_seq", initialValue = 1, allocationSize = 1)
 public class Episode extends BaseEntity{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "myEpisodeSeq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="episode_id")
     private Long id;
 
