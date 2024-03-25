@@ -21,15 +21,16 @@ public class Episode extends BaseEntity{
     @Column(name="episode_id")
     private Long id;
 
-    @Column(length = 100, nullable = false) private String title;
-    @Column(length = 500, nullable = false) private String summary;
+    @Setter @Column(length = 100, nullable = false) private String title;
+    @Setter @Column(length = 500, nullable = false) private String summary;
 
     @Lob
     @Column(nullable = false)
+    @Setter
     private String content;
 
-    @Column(nullable = false) @ColumnDefault("0") private int goalAccount;
-    @Column(nullable = false) @ColumnDefault("0") private int currentAccount;
+    @Setter @Column(nullable = false) @ColumnDefault("0") private int goalAccount;
+    @Setter @Column(nullable = false) @ColumnDefault("0") private int currentAccount;
     @Enumerated(EnumType.STRING) private BoardStatus boardStatus;
 
 
