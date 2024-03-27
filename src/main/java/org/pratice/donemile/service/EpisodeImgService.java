@@ -1,0 +1,11 @@
+package org.pratice.donemile.service;
+
+import org.pratice.donemile.domain.EpisodeImg;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+
+public interface EpisodeImgService {
+    // 이미지 등록
+    void Imgsave(EpisodeImg episodeImg, List<MultipartFile> episodeImgFile);
+}

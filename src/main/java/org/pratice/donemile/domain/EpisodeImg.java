@@ -17,10 +17,12 @@ public class EpisodeImg extends BaseEntity{
     @Column(name="img_id")
     private Long id;
 
-    private String uuid;
-    private String imgName;
-    private String path;
+    @Setter private String uuid;
+    @Setter private String imgName;
+    @Setter private String path;
+    @Setter private String repimgYn;
 
+    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="episode_id")
     private Episode episode;
