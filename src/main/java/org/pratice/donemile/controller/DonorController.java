@@ -33,8 +33,8 @@ public class DonorController {
         if (result.hasErrors()) {
             return "signup";
         }
-        donorService.registerNewDonor(donorForm);
         attributes.addFlashAttribute("successMessage", "회원 가입에 성공했습니다.");
+
         return "redirect:/login"; // 가입 성공 후 로그인 페이지로 리다이렉트
 
     }
