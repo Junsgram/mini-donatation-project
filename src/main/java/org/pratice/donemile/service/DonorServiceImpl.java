@@ -1,5 +1,6 @@
 package org.pratice.donemile.service;
 
+import lombok.RequiredArgsConstructor;
 import org.pratice.donemile.domain.Donor;
 import org.pratice.donemile.dto.DonorRegistrationDTO;
 import org.pratice.donemile.repository.DonorRepository;
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class DonorServiceImpl implements DonorService{
@@ -39,6 +42,39 @@ public class DonorServiceImpl implements DonorService{
 
         return donorRepository.save(donor);
 
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Donor> findAllDonors(){
+        return donorRepository.findAll();
+    }
+
+    @Override
+    @Transactional
+    public Donor updateDonor(Donor donor) {
+        //ID 존재여부 확인
+        if (donor.getId() == null || !donorRepository.existsById(donor.getId())){
+            throw new IllegalArgumentException("기부자 정보를 찾을 수 없습니다.");
+        }
+        return donorRepository.save(donor);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Donor findDonorById(Long id) {
+        return donorRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("기부자 정보를 찾을 수 없습니다.")
+        );
+    }
+
+    @Override
+    @Transactional
+    public void deleteDonorById(Long id) {
+        if(!donorRepository.existsById(id)){
+            throw new IllegalArgumentException("기부자 정보를 찾을 수 없습니다.");
+        }
+        donorRepository.deleteById(id);
     }
 
 }
