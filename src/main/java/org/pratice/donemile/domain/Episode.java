@@ -38,7 +38,6 @@ public class Episode extends BaseEntity{
     @JoinColumn(name="donor_id")
     private Donor donor;
 
-    @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name="img_id")
     private List<EpisodeImg> episodeImg;
