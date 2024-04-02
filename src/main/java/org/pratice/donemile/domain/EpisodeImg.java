@@ -19,6 +19,7 @@ public class EpisodeImg extends BaseEntity{
 
     @Setter private String uuid;
     @Setter private String imgName;
+    @Setter private String originImgName;
     @Setter private String path;
     @Setter private String repimgYn;
 
@@ -26,4 +27,10 @@ public class EpisodeImg extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="episode_id")
     private Episode episode;
+
+    public void updateImg(String originImgName, String imgName, String path) {
+        this.imgName = imgName;
+        this.originImgName = originImgName;
+        this.path = path;
+    }
 }

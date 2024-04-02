@@ -20,8 +20,10 @@ spring:
       max-file-size: 20MB
       max-request-size: 100MB
   application:
-    itemImgLocation: /Users/yunseongjun/programming/Project/ImgFIle/episode
-    uploadPath: file:/Users/yunseongjun/programming/Project/ImgFIle/
+---
+episodeImgLocation: /Users/yunseongjun/programming/Project/ImgFIle/episode
+uploadPath: file:/Users/yunseongjun/programming/Project/ImgFIle/
+---
   jpa:
     defer-datasource-initialization: true
     hibernate.ddl-auto: update

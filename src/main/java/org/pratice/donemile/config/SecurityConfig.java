@@ -30,17 +30,18 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf ->
-                        csrf.ignoringRequestMatchers("/signup") //회원가입 경로에 대한 CSRF검증 비활성화
+                        csrf.ignoringRequestMatchers("/**") //회원가입 경로에 대한 CSRF검증 비활성화
                 )
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/login","/webjars/**" ,"/**","/error","/","/css/**", "/js/**", "/img/**", "/vendor/**", "/signup","/homepage/**").permitAll()
+                        .requestMatchers("/login","/webjars/**" ,"/**","/error","/","/css/**", "/js/**", "/img/**", "/vendor/**", "/signup").permitAll()
+                        .requestMatchers("/episode/**").hasAnyRole("ADMIN","DONOR")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
 //                        .loginPage("/login")  //로그인 페이지 경로
                         .loginProcessingUrl("/loginProc") //로그인 처리 경로
                         .usernameParameter("email") //로그인 폼의 'username'파라미터 명을 'email'로 설정
-                        .defaultSuccessUrl("/homepage", true) //로그인 성공 후 리다이렉션할 URL
+                        .defaultSuccessUrl("/", true) //로그인 성공 후 리다이렉션할 URL
                         .failureUrl("/login?error=true") //로그인 실패 시 이동할 URL
                         .permitAll() // 모든 사용자 접근 허용
                 )
