@@ -11,13 +11,22 @@ logging:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/board
+    url: jdbc:mysql://localhost:3306/junjunDB
     username: junjun
     password: junjun
     driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
+  application:
+---
+episodeImgLocation: /Users/yunseongjun/programming/Project/ImgFIle/episode
+uploadPath: file:/Users/yunseongjun/programming/Project/ImgFIle/
+---
   jpa:
     defer-datasource-initialization: true
-    hibernate.ddl-auto: create
+    hibernate.ddl-auto: update
     show-sql: true
     properties:
       hibernate.format_sql: true

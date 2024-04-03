@@ -47,4 +47,4 @@
 ![UseCase](https://github.com/Junsgram/mini-donatation-project/assets/158553195/2e4672b6-815d-415f-b4f6-783709759122)
 ---
 # ERD
-![Donemile_Project_ERD](https://github.com/Junsgram/mini-donatation-project/assets/158553195/2a30bc59-7d10-4551-923f-a089deea4231)
+![Image](https://github.com/Junsgram/board-project/assets/158553195/b1cdf4b1-ffcd-4724-ada7-6e40f96ab274)
