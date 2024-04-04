@@ -12,12 +12,14 @@ import org.pratice.donemile.constant.Role;
 import org.pratice.donemile.domain.Donor;
 import org.pratice.donemile.dto.DonorRegistrationDTO;
 import org.pratice.donemile.repository.DonorRepository;
+import org.pratice.donemile.service.DonorService;
 import org.pratice.donemile.service.DonorServiceImpl;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -35,6 +37,11 @@ public class DonorServiceImplTest {
 
     @InjectMocks
     private DonorServiceImpl donorService;
+
+//    @BeforeEach
+//    public void setUp() {
+//        when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
+//    }
 
     //CREATE
     @Test
@@ -145,6 +152,34 @@ public class DonorServiceImplTest {
         donorService.deleteDonorById(donorId);
 
         verify(donorRepository).deleteById(donorId);
+    }
+
+    @Test
+    public void whenFindDonorByEmail_thenReturnDonor() {
+        String email = "test@example.com";
+        Donor donor = new Donor();
+        donor.setEmail(email);
+
+        when(donorRepository.findByEmail(anyString())).thenReturn(Optional.of(donor));
+
+        Donor found = donorService.findDonorByEmail(email);
+
+        assertNotNull(found);
+        assertEquals(email, found.getEmail());
+        verify(donorRepository).findByEmail(email);
+    }
+
+    @Test
+    public void whenFindDonorByEmail_thenThrowException() {
+        String email = "nonexisting@example.com";
+        when(donorRepository.findByEmail(email)).thenReturn(Optional.empty());
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->{
+            donorService.findDonorByEmail(email);
+        });
+
+        assertTrue(exception.getMessage().contains("기부자를 이메일로 찾을 수 없습니다."));
+        verify(donorRepository).findByEmail(email);
     }
 
 }

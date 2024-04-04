@@ -5,9 +5,10 @@ management.endpoints.web.exposure.include: "*"
 logging:
   level:
     # root ??? ?? log? debug? ??? ??? ???? ???? ? ??
-    org.board.boardproject: debug
+    org.pratice.donemile: debug
     org.springframework.web.servlet: debug
     org.hibernate.type.descriptor.sql.BasicBinder: trace
+    org.springframework.security.web: trace
 
 spring:
   datasource:
@@ -20,10 +21,7 @@ spring:
       max-file-size: 20MB
       max-request-size: 100MB
   application:
----
-episodeImgLocation: /Users/yunseongjun/programming/Project/ImgFIle/episode
-uploadPath: file:/Users/yunseongjun/programming/Project/ImgFIle/
----
+
   jpa:
     defer-datasource-initialization: true
     hibernate.ddl-auto: update
@@ -34,7 +32,12 @@ uploadPath: file:/Users/yunseongjun/programming/Project/ImgFIle/
   # h2 console url connect false -> true change
   h2.console.enabled: false
   sql.init.mode: always
+  profiles:
+    include: oauth
 #  data.rest:
 #    base-path: /api
 #    detection-strategy: annotated
+---
+episodeImgLocation: /Users/yunseongjun/programming/Project/ImgFIle/episode
+uploadPath: file:/Users/yunseongjun/programming/Project/ImgFIle/
 ---

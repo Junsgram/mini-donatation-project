@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.pratice.donemile.domain.Episode;
 import org.pratice.donemile.domain.EpisodeImg;
 import org.pratice.donemile.dto.EpisodeDTO;
+import org.pratice.donemile.dto.PageRequestDTO;
+import org.pratice.donemile.dto.PageResultDTO;
 import org.pratice.donemile.repository.EpisodeRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
