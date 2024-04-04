@@ -24,6 +24,7 @@ public class EpisodeDTO {
     private int currentAccount;
     private BoardStatus boardStatus;
     private Donor donor;
+    @Builder.Default
     private List<EpisodeImg> episodeImg = new ArrayList<>();
     private LocalDateTime createdAt;
     private String createdBy;

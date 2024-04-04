@@ -50,15 +50,46 @@ public class DonorServiceImpl implements DonorService{
         return donorRepository.findAll();
     }
 
+
     @Override
     @Transactional
-    public Donor updateDonor(Donor donor) {
-        //ID 존재여부 확인
-        if (donor.getId() == null || !donorRepository.existsById(donor.getId())){
-            throw new IllegalArgumentException("기부자 정보를 찾을 수 없습니다.");
+    public Donor updateDonor(Donor updatedDonor) {
+        if (updatedDonor.getId() == null || !donorRepository.existsById(updatedDonor.getId())){
+            throw  new IllegalArgumentException("기부자 정보를 찾을 수 없습니다.");
         }
-        return donorRepository.save(donor);
+
+        Donor existingDonor = donorRepository.findById(updatedDonor.getId())
+                .orElseThrow(() -> new IllegalArgumentException("기부자 정보를 찾을 수 없습니다."));
+
+        // 비밀번호 변경이 요청된 경우에만 업데이트
+        if (updatedDonor.getPassword() != null && !updatedDonor.getPassword().trim().isEmpty()) {
+            String encodedPassword = passwordEncoder.encode(updatedDonor.getPassword());
+            existingDonor.setPassword(encodedPassword);
+        }
+
+        // 다른 필드 업데이트. 변경 사항이 있는 필드만 업데이트를 수행
+        if (updatedDonor.getEmail() != null && !updatedDonor.getEmail().isEmpty()) {
+            existingDonor.setEmail(updatedDonor.getEmail());
+        }
+        if (updatedDonor.getDonorName() != null && !updatedDonor.getDonorName().isEmpty()) {
+            existingDonor.setDonorName(updatedDonor.getDonorName());
+        }
+        if (updatedDonor.getNickName() != null && !updatedDonor.getNickName().isEmpty()) {
+            existingDonor.setNickName(updatedDonor.getNickName());
+        }
+        if (updatedDonor.getAddress() != null && !updatedDonor.getAddress().isEmpty()) {
+            existingDonor.setAddress(updatedDonor.getAddress());
+        }
+        if (updatedDonor.getBirth() != null) {
+            existingDonor.setBirth(updatedDonor.getBirth());
+        }
+        if (updatedDonor.getPhoneNum() != null && !updatedDonor.getPhoneNum().isEmpty()) {
+            existingDonor.setPhoneNum(updatedDonor.getPhoneNum());
+        }
+
+        return donorRepository.save(existingDonor);
     }
+
 
     @Override
     @Transactional(readOnly = true)
@@ -69,6 +100,12 @@ public class DonorServiceImpl implements DonorService{
     }
 
     @Override
+    public Donor findDonorByEmail(String email){
+        return donorRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("기부자를 이메일로 찾을 수 없습니다."+ email));
+    }
+
+    @Override
     @Transactional
     public void deleteDonorById(Long id) {
         if(!donorRepository.existsById(id)){
@@ -76,5 +113,6 @@ public class DonorServiceImpl implements DonorService{
         }
         donorRepository.deleteById(id);
     }
+
 
 }

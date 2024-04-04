@@ -7,7 +7,9 @@ import org.pratice.donemile.constant.Role;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -30,23 +32,25 @@ public class Donor extends BaseEntity {
     @Column(length = 100, nullable = false)
     private String password;
 
-    @Column(length = 30, nullable = false)
+    @Column(length = 30, nullable = true)
     private String donorName;
 
-    @Column(length = 30, nullable = false)
+    @Column(length = 30, nullable = true)
     private String nickName;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100)
     private String address;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDate birth;
 
-    @Column(length = 30, nullable = false)
+    @Column(length = 30, nullable = true)
     private String phoneNum;
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    private boolean fromSocial;
 
     @ToString.Exclude
     @OneToOne(fetch = FetchType.LAZY)
@@ -58,4 +62,11 @@ public class Donor extends BaseEntity {
     @JoinColumn(name="recommend_id")
     private List<DonationRecord> donationRecord;
 
+    @ElementCollection(fetch = FetchType.LAZY)
+    @Builder.Default
+    private Set<Role> roleSet = new HashSet<>();
+
+    public void addRole(Role role){
+        roleSet.add(role);
+    }
 }

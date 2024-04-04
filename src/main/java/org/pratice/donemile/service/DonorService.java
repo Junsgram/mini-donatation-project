@@ -12,7 +12,11 @@ public interface DonorService {
 
     Donor findDonorById(Long id);
 
+    Donor findDonorByEmail(String email);
+
     List<Donor> findAllDonors();
 
     void deleteDonorById(Long id);
+
+
 }
